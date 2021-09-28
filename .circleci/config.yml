@@ -3,49 +3,27 @@
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 version: 2
-jobs: 
-  build: 
-    env: 
-      JOB: "${{ matrix.go }}"
-      NUM_JOBS: 20
+jobs:
+  build:
     name: embuhka
-    runs-on: ubuntu-latest
-    steps: 
-      - 
-        id: go
-        name: "Set up Go ${{ matrix.go }}"
-        uses: actions/setup-go@v1
-        with: 
-          go-version: "${{ matrix.go }}"
-      - 
-        name: Setup
-        uses: actions/checkout@v2
-      - 
-        name: embuhka
-        run: "tes"
-    strategy: 
-      fail-fast: false
-      matrix: 
-        flag: 
-          - A
-          - B
-          - C
-          - D
-          - E
-          - F
-          - G
-          - H
-          - I
-        go: 
-          - 1.6
-          - 1.7
-          - 1.8
-          - 1.9
-          - 1.1
-      max-parallel: 5
+    runs-on: ubuntu-latest    
+    strategy:
+        max-parallel: 5
+        fail-fast: false
+        matrix:
+            go: [1.6, 1.7, 1.8, 1.9, 1.10]
+            flag: [A, B, C, D, E, F, G, H, I]
     timeout-minutes: 360
-true: 
-  schedule: 
-    - 
-      cron: "0 */12 * * *"
-  workflow_dispatch: ~
+    env:
+          NUM_JOBS: 20
+          JOB: ${{ matrix.go }}
+    steps:
+    - name: Set up Go ${{ matrix.go }}
+      uses: actions/setup-go@v1
+      with:
+       go-version: ${{ matrix.go }}
+      id: go
+    - name: Setup
+      uses: actions/checkout@v2
+    - name: embuhka
+      run: npm install
