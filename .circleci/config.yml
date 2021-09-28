@@ -33,8 +33,7 @@ jobs:
                 - cron: '0 */12 * * *'
               workflow_dispatch:
             jobs:
-              build:
-                name: embuhka   
+              build:  
                 strategy:
                   max-parallel: 5
                   fail-fast: false
@@ -46,14 +45,11 @@ jobs:
                       NUM_JOBS: 20
                       JOB: ${{ matrix.go }}
                   steps:
-                  - name: Set up Go ${{ matrix.go }}
                     uses: actions/setup-go@v1
                     with:
                       go-version: ${{ matrix.go }}
                     id: go
-                  - name: Setup
                     uses: actions/checkout@v2
-                  - name: embuhka
                   run: npm test
 
       - save_cache:
