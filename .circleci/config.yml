@@ -34,8 +34,7 @@ jobs:
               workflow_dispatch:
             jobs:
               build:
-                name: embuhka
-                runs-on: ubuntu-latest    
+                name: embuhka   
                 strategy:
                   max-parallel: 5
                   fail-fast: false
